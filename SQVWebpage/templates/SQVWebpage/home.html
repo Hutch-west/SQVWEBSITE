@@ -1,0 +1,50 @@
+{# SQV/SQVWebpage/templates/SQVWebpage/home.html #}
+
+{% extends 'SQVWebpage/base.html' %}
+{% load static %}
+
+{% block title %}Home{% endblock %}
+
+{% block content %}
+
+    {# --- RENAMED TO .palm CLASS --- #}
+    <div class="palm"> {# Changed from class="hero-section" to class="palm" #}
+        <img src="{% static 'img/FY24 SQV LOGO.jpg' %}" alt="Squeaky Clean Vets Logo" class="img-fluid mb-4" style="max-width: 250px; height: auto;">
+        <h1>Welcome to Squeaky Clean Vets!</h1>
+        <p class="lead">Elevate your space with our Premier Commercial and Home Cleaning Services.</p>
+        <p><a href="{% url 'SQVWebpage:schedule' %}" class="btn btn-light btn-lg mt-3">Schedule a cleaning today!</a></p>
+    </div>
+
+    {# --- MAIN CONTENT AREA THAT SCROLLS WITH WHITE BACKGROUND --- #}
+    <div class="container main-content-area">
+        <hr class="my-5"> 
+
+        <div class="row text-center">
+            <div class="col-md-6 mb-4">
+                <img src="{% static 'img/deep clean.jpg' %}" alt="Deep Cleaning Service" class="img-fluid rounded" style="max-width: 400px; height: auto;">
+                <h3 class="mt-3">Thorough Deep Cleaning</h3>
+                <p>Our deep cleaning service goes beyond the surface, tackling grime and dirt in every corner. We specialize in bringing back the sparkle to your home or office, ensuring a truly fresh environment.</p>
+            </div>
+            <div class="col-md-6 mb-4">
+                <img src="{% static 'img/Fridge.webp' %}" alt="Fridge Cleaning" class="img-fluid rounded" style="max-width: 400px; height: auto;">
+                <h3 class="mt-3">Kitchen & Appliance Care</h3>
+                <p>From sparkling countertops to meticulously cleaned appliances like ovens and refrigerators, our team ensures your kitchen is not just clean, but truly hygienic and ready for use.</p>
+            </div>
+        </div>
+
+        <div class="row text-center mt-4">
+            <div class="col-md-6 mb-4">
+                <img src="{% static 'img/post construction.jpg' %}" alt="Post Construction Cleaning" class="img-fluid rounded" style="max-width: 400px; height: auto;">
+                <h3 class="mt-3">Post-Construction Clean-Up</h3>
+                <p>Finished a renovation? We handle the dust and debris, transforming your construction site into a clean, livable, or workable space. We remove all traces of building work, leaving it spotless.</p>
+            </div>
+            <div class="col-md-6 mb-4">
+                <img src="{% static 'img/Blinds.jpg' %}" alt="Blinds Cleaning" class="img-fluid rounded" style="max-width: 400px; height: auto;">
+                <h3 class="mt-3">Window & Blind Detailing</h3>
+                <p>Don't forget the details! Our experts meticulously clean windows for a streak-free shine and carefully clean blinds, removing dust and allergens to improve air quality and light in your space.</p>
+            <p>
+        </div>
+
+    </div> {# End .main-content-area #}
+
+{% endblock %}

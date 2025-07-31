@@ -1,0 +1,136 @@
+{# SQV/SQVWebpage/templates/SQVWebpage/schedule.html #}
+
+{% extends 'SQVWebpage/base.html' %}
+{% load static %}
+
+{% block title %}Schedule Cleaning{% endblock %}
+
+{% block content %}
+    <div class="container mt-5 pt-5">
+        <h1>Schedule Your Cleaning Service</h1>
+        <p class="lead">Confirm your selections, choose a date and time, and provide your contact details.</p>
+
+        <div class="row">
+
+            {# LEFT COLUMN: Service Summary and Adjustment #}
+            <div class="col-md-6 mb-4">
+                <div class="card mb-4">
+                    <div class="card-header">
+                        <h4>Your Estimated Service Details</h4>
+                    </div>
+                    <div class="card-body">
+                        <ul id="schedulingServiceList" class="list-group list-group-flush mb-3">
+                            {# Services from pricing page will be loaded here by JavaScript #}
+                            <li class="list-group-item text-muted">Loading services...</li>
+                        </ul>
+                        <div class="mb-3">
+                            <label for="schedulingNumRooms" class="form-label">Number of Bedrooms:</label>
+                            <input type="number" class="form-control" id="schedulingNumRooms" min="1" value="1">
+                        </div>
+                        <div class="mb-3">
+                            <label for="schedulingNumBathrooms" class="form-label">Number of Bathrooms:</label>
+                            <input type="number" class="form-control" id="schedulingNumBathrooms" min="1" value="1">
+                        </div>
+                        
+                        <h5 class="mt-4">Additional Options</h5>
+                        <div id="schedulingAdditionalOptions">
+                            {# Additional options from pricing page will be loaded here by JavaScript #}
+                            {# We'll dynamically generate checkboxes here, or just list confirmed ones #}
+                        </div>
+
+                        <h4 class="mt-4">Final Estimated Total: <span id="schedulingEstimatedPrice" class="float-end">$0.00</span></h4>
+                        <div id="schedulingItemizedBreakdown" class="small text-muted">
+                            {# Itemized breakdown will be displayed here #}
+                        </div>
+                    </div>
+                </div>
+
+                <p class="text-muted small">Prices are estimates and may vary based on a final assessment.</p>
+            </div>
+
+            {# RIGHT COLUMN: Calendar and Contact Form #}
+            <div class="col-md-6 mb-4">
+                <div class="card mb-4">
+                    <div class="card-header">
+                        <h4>Choose Date & Time</h4>
+                    </div>
+                    <div class="card-body">
+                        {# Placeholder for the calendar. We'll integrate a JS library here. #}
+                        <div id="calendar" class="mb-3"></div>
+                        <div class="mb-3">
+                            <label for="selectedDate" class="form-label">Selected Date:</label>
+                            <input type="text" class="form-control" id="selectedDate" readonly>
+                        </div>
+                        <div class="mb-3">
+                            <label for="selectedTime" class="form-label">Available Time Slots:</label>
+                            <select class="form-select" id="selectedTime">
+                                <option value="">Select a time</option>
+                                {# Time slots will be dynamically populated based on selected date #}
+                            </select>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="card mb-4">
+                    <div class="card-header">
+                        <h4>Your Contact Information</h4>
+                    </div>
+                    <div class="card-body">
+                        <form id="scheduleForm" method="post">
+                            {% csrf_token %}
+                            {# Hidden fields to store service data and total before final submission #}
+                            <input type="hidden" id="hiddenServicesData" name="services_data">
+                            <input type="hidden" id="hiddenAdditionalOptionsData" name="additional_options_data">
+                            <input type="hidden" id="hiddenRooms" name="num_rooms">
+                            <input type="hidden" id="hiddenBathrooms" name="num_bathrooms">
+                            <input type="hidden" id="hiddenTotalPrice" name="total_price">
+                            <input type="hidden" id="hiddenSelectedDate" name="selected_date">
+                            <input type="hidden" id="hiddenSelectedTime" name="selected_time">
+
+                            <div class="mb-3">
+                                <label for="fullName" class="form-label">Full Name <span class="text-danger">*</span></label>
+                                <input type="text" class="form-control" id="fullName" name="full_name" required>
+                            </div>
+                            <div class="mb-3">
+                                <label for="address" class="form-label">Street Address <span class="text-danger">*</span></label>
+                                <input type="text" class="form-control" id="address" name="address" required>
+                            </div>
+                            <div class="mb-3">
+                                <label for="city" class="form-label">City <span class="text-danger">*</span></label>
+                                <input type="text" class="form-control" id="city" name="city" required>
+                            </div>
+                            <div class="mb-3">
+                                <label for="state" class="form-label">State <span class="text-danger">*</span></label>
+                                <input type="text" class="form-control" id="state" name="state" required>
+                            </div>
+                            <div class="mb-3">
+                                <label for="zipCode" class="form-label">Zip Code <span class="text-danger">*</span></label>
+                                <input type="text" class="form-control" id="zipCode" name="zip_code" required>
+                            </div>
+                            <div class="mb-3">
+                                <label for="phoneNumber" class="form-label">Phone Number <span class="text-danger">*</span></label>
+                                <input type="tel" class="form-control" id="phoneNumber" name="phone_number" required>
+                            </div>
+                            <div class="mb-3">
+                                <label for="email" class="form-label">Email Address <span class="text-danger">*</span></label>
+                                <input type="email" class="form-control" id="email" name="email" required>
+                            </div>
+                            <div class="mb-3 form-check">
+                                <input type="checkbox" class="form-check-input" id="hasPets" name="has_pets">
+                                <label class="form-check-label" for="hasPets">Do you have pets?</label>
+                            </div>
+                            <button type="submit" class="btn btn-primary btn-lg w-100">Confirm Booking</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    {# External CSS and JS for the calendar library (e.g., Flatpickr) #}
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
+
+    {# Your custom JavaScript for the scheduling page #}
+    <script src="{% static 'js/schedule.js' %}"></script>
+{% endblock content %}

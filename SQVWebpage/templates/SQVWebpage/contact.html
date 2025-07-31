@@ -1,0 +1,63 @@
+{# SQV/SQVWebpage/templates/SQVWebpage/contact.html #}
+
+{% extends 'SQVWebpage/base.html' %}
+{% load static %} {# Make sure this is here if you use static files, though not directly for forms #}
+
+{% block title %}Contact Us{% endblock %}
+
+{% block content %}
+    <div class="row justify-content-center">
+        <div class="col-md-8">
+            <h1 class="mb-4">Contact Squeaky Clean Vets</h1>
+            <p>Have questions or need a custom quote? Reach out to us!</p>
+
+            <div class="card p-4 mb-4">
+                <h3>Our Contact Information:</h3>
+                <p><strong>Phone:</strong> (951) 635-6724</p>
+                <p><strong>Email:</strong> squeakycleanvets@gmail.com</p> {# This is your manually displayed email #}
+                <p><strong>Address:</strong> 123 Clean Street, Wildomar, CA 92595</p>
+            </div>
+
+            <h3>Send Us a Message:</h3>
+
+            {# Display Django messages (success/error from views.py) #}
+            {% if messages %}
+                <ul class="messages">
+                    {% for message in messages %}
+                        <li{% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</li>
+                    {% endfor %}
+                </ul>
+            {% endif %}
+
+            <form method="post"> {# Add method="post" #}
+                {% csrf_token %} {# Add the CSRF token for security #}
+
+                {# Render the form fields automatically with Bootstrap classes if possible, or customize #}
+                {% for field in form %}
+                    <div class="mb-3">
+                        {{ field.label_tag }}
+                        {{ field }}
+                        {% if field.help_text %}
+                            <div class="form-text">{{ field.help_text }}</div>
+                        {% endif %}
+                        {% for error in field.errors %}
+                            <div class="text-danger">{{ error }}</div> {# Display field-specific errors #}
+                        {% endfor %}
+                    </div>
+                {% endfor %}
+
+                {# If there are non-field errors (e.g., from form.clean() method) #}
+                {% if form.non_field_errors %}
+                    <div class="alert alert-danger" role="alert">
+                        {% for error in form.non_field_errors %}
+                            {{ error }}
+                        {% endfor %}
+                    </div>
+                {% endif %}
+
+                <button type="submit" class="btn btn-primary">Send Message</button>
+            </form>
+        </div>
+    </div>
+    <p class="mt-4"><a href="{% url 'SQVWebpage:home' %}">Back to Home</a></p>
+{% endblock %}

@@ -1,0 +1,115 @@
+{% extends 'SQVWebpage/base.html' %} 
+{% load static %}
+
+{% block title %}Pricing & Estimate - Squeaky Clean Vets{% endblock %}
+
+{% block content %}
+    <div class="container mt-5 pt-5">
+        <h1>Get Your Cleaning Estimate</h1>
+        <p>Explore our services and build your custom cleaning package.</p>
+
+        <div class="row"> {# Start of Bootstrap Row for two-column layout #}
+
+            {# LEFT COLUMN: Service Menu #}
+            <div class="col-md-6"> 
+                <h2>Our Services</h2>
+                <div id="serviceMenu" class="list-group">
+                    <a href="#" class="list-group-item list-group-item-action service-item" 
+                       data-service-id="standard" data-service-name="Standard Cleaning" 
+                       data-base-price="100" data-per-room="30" data-per-bathroom="20">
+                        Standard Cleaning <span class="badge bg-primary float-end">$100+</span>
+                    </a>
+                    <a href="#" class="list-group-item list-group-item-action service-item" 
+                       data-service-id="deep" data-service-name="Deep Cleaning" 
+                       data-base-price="180" data-per-room="45" data-per-bathroom="30">
+                        Deep Cleaning <span class="badge bg-primary float-end">$180+</span>
+                    </a>
+                    <a href="#" class="list-group-item list-group-item-action service-item" 
+                       data-service-id="moveInMoveOut" data-service-name="Move-in/Move-out" 
+                       data-base-price="250" data-per-room="55" data-per-bathroom="40">
+                        Move-in/Move-out Cleaning <span class="badge bg-primary float-end">$250+</span>
+                    </a>
+                    <a href="#" class="list-group-item list-group-item-action service-item" 
+                       data-service-id="postConstruction" data-service-name="Post-Construction" 
+                       data-base-price="300" data-per-room="60" data-per-bathroom="45">
+                        Post-Construction Cleaning <span class="badge bg-primary float-end">$300+</span>
+                    </a>
+                    {# You can add more services here if needed #}
+                </div>
+
+                <h3 class="mt-4">Additional Options</h3>
+                <div class="form-check mt-2">
+                    <input class="form-check-input additional-option" type="checkbox" value="petFriendly" id="petFriendly" data-price="50">
+                    <label class="form-check-label" for="petFriendly">
+                        Pet-Friendly Cleaning (add $50)
+                    </label>
+                </div>
+                <div class="form-check mt-2">
+                    <input class="form-check-input additional-option" type="checkbox" value="ecoFriendly" id="ecoFriendly" data-price="20">
+                    <label class="form-check-label" for="ecoFriendly">
+                        Eco-Friendly Products (add $20)
+                    </label>
+                </div>
+                {# Add more additional options if necessary #}
+
+            </div> {# End of Left Column #}
+
+            {# RIGHT COLUMN: Calculator and Selected Services #}
+            <div class="col-md-6">
+                <h2>Your Custom Estimate</h2>
+
+                <div class="card mb-3">
+                    <div class="card-header">Selected Services</div>
+                    <ul id="selectedServicesList" class="list-group list-group-flush">
+                        {# Selected services will be dynamically added here by JavaScript #}
+                        <li class="list-group-item text-muted" id="noServiceSelected">No services selected yet. Click an item on the left!</li>
+                    </ul>
+                </div>
+
+                <div class="card mb-3">
+                    <div class="card-header">Details</div>
+                    <div class="card-body">
+                        <div class="mb-3">
+                            <label for="numRooms" class="form-label">Number of Bedrooms:</label>
+                            <input type="number" class="form-control" id="numRooms" min="1" value="1">
+                        </div>
+                        <div class="mb-3">
+                            <label for="numBathrooms" class="form-label">Number of Bathrooms:</label>
+                            <input type="number" class="form-control" id="numBathrooms" min="1" value="1">
+                        </div>
+                        {# You can re-add full name, address if desired, or move them to the scheduling page #}
+                        {# For simplicity in this calculator, I've focused on service details #}
+                        <div class="mb-3">
+                            <label for="fullName" class="form-label">Your Full Name (Optional):</label>
+                            <input type="text" class="form-control" id="fullName">
+                        </div>
+                        <div class="mb-3">
+                            <label for="address" class="form-label">Service Address (Optional):</label>
+                            <input type="text" class="form-control" id="address">
+                        </div>
+                    </div>
+                </div>
+
+                <button type="button" class="btn btn-primary btn-lg w-100" id="getEstimateBtn">Get Estimate</button>
+
+                <div id="estimateResult" class="card mt-4 p-3 hidden">
+                    <div class="card-body">
+                        <h3>Estimated Total: <span id="estimatedPrice" class="float-end">$0.00</span></h3>
+                        <div id="itemizedBreakdown" class="small text-muted mb-3"></div>
+                        <button class="btn btn-success mt-3 w-100" id="proceedToScheduleBtn" data-schedule-url="{% url 'SQVWebpage:schedule' %}">
+                            Proceed to Scheduling
+                        </button>
+                    </div>
+                </div>
+
+            </div>
+
+        </div> 
+
+    </div>
+
+    {# Link to your pricing-specific CSS and JS *inside* the block content if not in base.html #}
+    {# If your base.html already links style.css, you might not need it here again, but pricing.css and script.js are specific to this page #}
+    <link rel="stylesheet" href="{% static 'css/pricing.css' %}">
+    <script src="{% static 'js/script.js' %}"></script>
+{% endblock content %}

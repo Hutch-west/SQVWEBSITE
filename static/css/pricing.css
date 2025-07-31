@@ -1,0 +1,190 @@
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f4f4f4;
+    margin: 0;
+    color: #333;
+}
+
+
+.container {
+    background-color: #ffffff;
+    padding: 30px;
+    border-radius: 8px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    /* Remove max-width: 500px; to allow columns to spread out */
+    width: 100%; 
+    /* text-align: center; - Remove this too, as content will be left-aligned in columns */
+}
+
+h1 {
+    color: #0056b3;
+    margin-bottom: 10px;
+    text-align: center; /* Center page main title */
+}
+
+h2 { /* Added for new h2 headings in columns */
+    color: #0056b3;
+    margin-bottom: 15px;
+    margin-top: 15px;
+    text-align: left;
+}
+
+h3 { /* For "Additional Options" and "Estimated Total" */
+    color: #0056b3;
+    margin-bottom: 10px;
+    text-align: left;
+}
+
+
+p {
+    margin-bottom: 25px;
+    line-height: 1.5;
+    text-align: center; /* Keep intro paragraph centered */
+}
+
+.form-group {
+    margin-bottom: 20px;
+    text-align: left;
+}
+
+label {
+    display: block;
+    margin-bottom: 8px;
+    font-weight: bold;
+    color: #555;
+}
+
+input[type="text"],
+input[type="number"],
+select {
+    width: 100%; /* Make them fill their parent column */
+    padding: 10px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    font-size: 16px;
+    box-sizing: border-box; 
+}
+
+/* Updated button styles to be more generic for Bootstrap buttons */
+.btn {
+    padding: 12px 25px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 17px;
+    font-weight: bold;
+    transition: background-color 0.3s ease;
+    margin-top: 15px;
+    width: auto; /* Allow button to size itself, or use w-100 class for full width */
+}
+
+.btn-primary {
+    background-color: #007bff;
+    color: white;
+}
+.btn-primary:hover {
+    background-color: #0056b3;
+}
+
+.btn-success {
+    background-color: #28a745; /* Green button */
+    color: white;
+}
+.btn-success:hover {
+    background-color: #218838;
+}
+
+/* Specific styles for the two-column layout elements */
+.list-group-item.service-item {
+    cursor: pointer;
+    transition: background-color 0.2s ease;
+}
+
+.list-group-item.service-item:hover {
+    background-color: #f8f9fa; /* Light grey on hover */
+}
+
+.list-group-item.selected {
+    background-color: #e2f0fb; /* Light blue for selected items */
+    border-left: 5px solid #007bff; /* Blue border to indicate selection */
+    font-weight: bold;
+}
+
+#selectedServicesList .list-group-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+#selectedServicesList .remove-service {
+    cursor: pointer;
+    color: #dc3545; /* Red for remove button */
+    font-weight: bold;
+    font-size: 1.2em;
+    padding: 5px 10px; /* Add padding for easier clicking */
+    border-radius: 4px; /* Slightly rounded corners */
+    transition: background-color 0.2s ease;
+}
+
+#selectedServicesList .remove-service:hover {
+    background-color: #f8d7da; /* Light red background on hover */
+}
+
+/* Card components from Bootstrap are generally well-styled, but ensure visibility */
+.card-header {
+    background-color: #f8f9fa; /* Light background for card headers */
+    font-weight: bold;
+    padding: 0.75rem 1.25rem;
+    margin-bottom: 0;
+    border-bottom: 1px solid rgba(0,0,0,.125);
+    border-top-left-radius: calc(.25rem - 1px);
+    border-top-right-radius: calc(.25rem - 1px);
+}
+
+.card-body {
+    padding: 1.25rem;
+}
+
+/* Estimate Result Display */
+#estimateResult {
+    margin-top: 30px;
+    padding-top: 20px; /* Kept for top border styling */
+    border-top: 1px solid #eee;
+    /* Ensure it's hidden by default, and visible when 'hidden' class is removed */
+    display: none; /* Initial state, will be toggled by JS */
+}
+
+#estimateResult:not(.hidden) {
+    display: block; /* When 'hidden' class is removed */
+}
+
+#estimateResult h3 {
+    text-align: left;
+    margin-bottom: 10px; /* Added margin */
+    display: flex; /* Use flex to align total price to end */
+    justify-content: space-between;
+    align-items: center;
+}
+
+#estimatedPrice {
+    font-size: 1.8em; /* Adjusted font size for better fit */
+    font-weight: bold;
+    color: #0056b3;
+    margin-bottom: 0; /* No bottom margin, handled by parent */
+}
+
+#itemizedBreakdown {
+    text-align: left;
+    margin-bottom: 15px; /* Added margin below breakdown */
+    padding-left: 15px; /* Indent breakdown for readability */
+    border-left: 2px solid #eee;
+}
+
+.hidden {
+    display: none !important; /* Use !important to ensure override */
+}
+
+/* Optional: Add some padding to columns for better spacing if needed */
+.col-md-6 {
+    padding-bottom: 20px; /* Add some space between sections */
+}

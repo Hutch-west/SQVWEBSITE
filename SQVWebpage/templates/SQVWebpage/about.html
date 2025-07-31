@@ -1,0 +1,47 @@
+{# SQV/SQVWebpage/templates/SQVWebpage/about.html #}
+
+{% extends 'SQVWebpage/base.html' %}
+{% load static %}
+
+{% block title %}About Us{% endblock %}
+
+{% block content %}
+
+    {# --- ABOUT US HERO SECTION WITH BACKGROUND IMAGE --- #}
+    <div class="about-hero">
+        <h1 class="mb-0">About Squeaky Clean Vets</h1> {# Moved h1 inside, removed mb-4 #}
+    </div>
+
+    {# --- MAIN CONTENT AREA BELOW THE HERO --- #}
+    {# This div now handles the container spacing for all content below the hero #}
+    <div class="container my-5"> 
+
+        <div class="row align-items-center mb-5"> 
+            <div class="col-md-6">
+                <img src="{% static 'img/Veteran Owned.jpg' %}" alt="Veteran Owned" class="img-fluid rounded shadow-sm">
+            </div>
+            <div class="col-md-6 mt-4 mt-md-0"> 
+                <p class="lead">We are a veteran-owned business committed to providing top-notch cleaning services with integrity and dedication.</p>
+                <p>Our team is passionate about creating clean, healthy, and organized spaces for our clients. Every service is performed with the discipline and attention to detail you'd expect from military veterans.</p>
+            </div>
+        </div>
+
+        <div class="row mb-5"> 
+            <div class="col-12">
+                <p>At Squeaky Clean Vets, our mission is to provide exceptional Commercial janitorial services to businesses in the local community. We are committed to providing a clean and safe environment for our clients and their employees. As former Veterans of the U.S. military, we believe in a high standard of cleanliness, punctuality, and unwavering dedication to customer satisfaction.</p>
+            </div>
+        </div>
+
+        {# Keep this example section commented out unless you want to use it #}
+        <div class="row text-center mb-5">
+            <div class="col-md-8 offset-md-2">
+                {# <img src="{% static 'img/deep clean.jpg' %}" alt="Our Cleaning Standards" class="img-fluid rounded shadow-sm"> #}
+                {# <p class="mt-3">Our rigorous standards ensure every job is completed to perfection.</p> #}
+            </div>
+        </div>
+
+        <div class="text-center">
+            <p><a href="{% url 'SQVWebpage:home' %}" class="btn btn-secondary btn-lg">Back to Home</a></p>
+        </div>
+    </div> {# End .container #}
+{% endblock %}
