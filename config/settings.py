@@ -25,10 +25,7 @@ SECRET_KEY = 'django-insecure-m@lde%55k1547-%u+ar4y0prb$dal$ubz63s*1o6+ubblq&7wt
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = [
-    'squeakycleanvets-website.onrender.com',
-    '127.0.0.1'
-]
+ALLOWED_HOSTS = ['127.0.0.1', 'localhost', 'squeakycleanvets-website.onrender.com']
 
 
 # Application definition
